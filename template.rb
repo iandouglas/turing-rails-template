@@ -182,8 +182,6 @@ gsub_file 'app/views/layouts/application.html.erb', /, 'data-turbolinks-track' =
 gsub_file 'app/views/layouts/application.html.erb', /, 'data-turbolinks-track' => 'reload'/, ''
 
 copy_file "simplecov", ".simplecov", force: true
-run "rm -f .rspec"
-copy_file "rspec", ".rspec", force: true
 
 run_with_clean_bundler_env "bundle install"
 
@@ -196,6 +194,7 @@ git :init unless preexisting_git_repo?
 empty_directory ".git/safe"
 
 rails_command("generate rspec:install")
+copy_file "rspec", ".rspec", force: true
 
 rails_command("db:drop")
 rails_command("db:create")
